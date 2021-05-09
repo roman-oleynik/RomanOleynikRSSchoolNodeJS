@@ -1,4 +1,5 @@
 const abort = require('./utils');
+const fs = require("fs");
 
 const validateShiftNum = value => {
     if (isNaN(value)) {
@@ -15,6 +16,10 @@ const validateAction = value => {
     return value;
 };
 const validateInputPath = value => {
+    if (!fs.existsSync(value)) {
+        abort("Input file doesn't exist");
+        return;
+    }
     if (!value.match(/[0-9a-zA-Z]+.txt$/)) {
         abort("Incorrect format of the input file");
         return;
@@ -22,6 +27,10 @@ const validateInputPath = value => {
     return value;
 };
 const validateOutputPath = value => {
+    if (!fs.existsSync(value)) {
+        abort("Input file doesn't exist");
+        return;
+    }
     if (!value.match(/[0-9a-zA-Z]+.txt$/)) {
         abort("Incorrect format of the output file");
         return;
